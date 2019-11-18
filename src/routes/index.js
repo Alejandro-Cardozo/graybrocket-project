@@ -10,6 +10,7 @@ router.get('/upload', (req, res) => {
 });
 
 router.post('/upload', (req, res) => {
+    console.log(req.file);
     res.send('Yippee-ki-yay madafaka');
 });
 

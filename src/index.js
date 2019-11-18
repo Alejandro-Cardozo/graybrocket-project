@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const multer = require('multer');
+const uuid = require('uuid/v4'); // v4 is the version that allows to create random IDs
 
 
 // Start
@@ -15,7 +16,13 @@ app.set('view engine', 'ejs'); //it is not necessary to require ejs bc is integr
 // Middlewares
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
-app.use(multer({dest: path.join(__dirname, 'public/img/uploads')}).single('image'));
+const storage = multer.diskStorage({
+    destination: path.join(__dirname, '/public/img/uploads'),
+    filename: (req, file, cb, filename) => {
+        cb(null, uuid() + path.extname(file.originalname));
+    }
+});
+app.use(multer({storage: storage}).single('image'));
 
 // Global vars
 
