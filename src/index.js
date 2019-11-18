@@ -7,6 +7,7 @@ const uuid = require('uuid/v4'); // v4 is the version that allows to create rand
 
 // Start
 const app = express();
+require('./database');
 
 // Settings
 app.set('port', process.env.PORT || 5500);
