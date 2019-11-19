@@ -16,7 +16,6 @@ router.get('/upload', (req, res) => {
 });
 
 router.post('/upload', async(req, res) => {
-    
     //Object that I gonna store in my DB
     const img = new image();
     img.title = req.body.title;

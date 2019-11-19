@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My profile</title>
+    <title>GrayBrocket | Image's profile</title>
     <%- include("fragments/head") %>
 </head>
 <body>
+    <%- include("fragments/navbar")%>
     <div class="container p-4">
         <div class="row">
             <div class="col-md-4 offset-md-4">
@@ -17,7 +18,7 @@
                         <h5 class="card-title"><%= image.title%></h5>
                         <p class="card-text"><%= image.description%></p>
                         <p class="card-text"><%= format(image.created_at) %></p>
-                        <a href="/img/<%= image._id%>/delete" class="btn btn-danger btn-block">
+                        <a class="btn btn-danger btn-block text-light" data-toggle="modal" data-target="#exampleModal">
                             DELETE
                         </a>
                     </div>
@@ -25,5 +26,25 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                You won't be able to undo this action
+            </div>
+            <div class="modal-footer">
+                <a href="/img/<%= image._id%>/delete" class="btn btn-danger">Do it</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    <%- include("fragments/foot") %>
 </body>
 </html>
