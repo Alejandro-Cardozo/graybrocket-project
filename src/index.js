@@ -3,7 +3,7 @@ const path = require('path');
 const morgan = require('morgan');
 const multer = require('multer');
 const uuid = require('uuid/v4'); // v4 is the version that allows to create random IDs
-
+const { format } = require('timeago.js')
 
 // Start
 const app = express();
@@ -26,11 +26,15 @@ const storage = multer.diskStorage({
 app.use(multer({storage: storage}).single('image'));
 
 // Global vars
-
+app.use((req, res, next) => {
+    app.locals.format = format;
+    next();
+});
 // Routes
 app.use(require('./routes/index'));
 
 // Static files
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Launch server
 app.listen(app.get('port'), () => {
